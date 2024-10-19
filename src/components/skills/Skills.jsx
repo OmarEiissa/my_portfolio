@@ -1,86 +1,25 @@
-import {
-  faBootstrap,
-  faCss3Alt,
-  faGithubAlt,
-  faGulp,
-  faHtml5,
-  faReact,
-  faSass,
-  faSquareJs,
-} from "@fortawesome/free-brands-svg-icons";
-import { faPaw, faTerminal } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Container, Typography, useTheme } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { skills } from "../../contexts";
+import SkillCard from "./SkillCard";
 
-const skills = [
-  {
-    name: "HTML",
-    icon: faHtml5,
-    text: "HTML is the standard markup language used to create web pages.",
-    color: "#e34f26",
-  },
-  {
-    name: "CSS",
-    icon: faCss3Alt,
-    text: "CSS is a styling language used to control the layout and appearance of web pages written in HTML or XML.",
-    color: "#264de4",
-  },
-  {
-    name: "JavaScript",
-    icon: faSquareJs,
-    text: "JavaScript is a high-level, dynamic, and interpreted programming language. It is primarily used for client-side scripting on the web, allowing developers to add interactive and dynamic effects to websites.",
-    color: "#f7df1e",
-  },
-  {
-    name: "BootStrap",
-    icon: faBootstrap,
-    text: "Bootst rap is a free and open-source CSS and JavaScript-based framework for building responsive and mobile-first front-end components. It is one of the most popular front-end frameworks used in web development.",
-    color: "#7952B3",
-  },
-  {
-    name: "SASS",
-    icon: faSass,
-    text: "SASS is a free and open-source CSS preprocessor scripting language that is compiled into CSS and is used to style and layout web pages.",
-    color: "#cf649a",
-  },
-  {
-    name: "PugJs",
-    icon: faPaw,
-    text: "Pu gJS is a high-performance template engine heavily influenced by Haml and implemented with JavaScript for Node.js and browsers. It compiles templates into JavaScript functions that can be efficiently rendered at runtime",
-    color: "#a86454",
-  },
-  {
-    name: "GulpJs",
-    icon: faGulp,
-    text: "GulpJS is a JavaScript toolkit created by Eric Schoffstall used for automating and enhancing the development workflow. It provides a flexible way to automate tasks and workflows, making it a popular choice among developers.",
-    color: "#cf4647",
-  },
-  {
-    name: "ReactJS",
-    icon: faReact,
-    text: "React is a free and open-source front-end JavaScript library for building user interfaces or UI components. It can also be used for developing single-page, mobile, or desktop applications.",
-    color: "#00d8ff",
-  },
-  {
-    name: "GitHub",
-    icon: faGithubAlt,
-    text: "GitHub is a web-based platform for version control and collaboration. It allows developers to host and manage their code repositories, collaborate with others, and track changes to their code.",
-    color: "#181717",
-  },
-  {
-    name: "Command Line",
-    icon: faTerminal,
-    text: "Command Line Interface (CLI) is a text-based interface for interacting with a computer s operating system or applications. It allows users to execute commands and scripts to perform various tasks, such as managing files, running programs, and configuring system settings.",
-    color: "#4d4d4d",
-  },
-];
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  EffectCoverflow,
+  Pagination,
+  Navigation,
+  Autoplay,
+} from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/effect-coverflow";
 
 function Skills() {
   const theme = useTheme();
-
   const skillsSectionRef = useRef(null);
 
   useEffect(() => {
@@ -96,7 +35,6 @@ function Skills() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [theme.palette.mode]);
-
 
   return (
     <Box
@@ -115,6 +53,29 @@ function Skills() {
         transition: theme.palette.transition.main,
         position: "relative",
         overflow: "hidden",
+        // swiper style
+        "& .swiper-pagination": {
+          bottom: "0",
+        },
+        "& .swiper-pagination-bullet": {
+          // @ts-ignore
+          backgroundColor: theme.palette.mainColor.main,
+        },
+        "& .swiper-pagination-bullet-active": {
+          // @ts-ignore
+          backgroundColor: theme.palette.mainColor.main,
+        },
+        "& .swiper-button-next:after,.swiper-button-prev:after": {
+          // @ts-ignore
+          color: theme.palette.mainColor.main,
+          fontSize: "30px",
+        },
+        // hide navigation on small screens
+        "@media (max-width: 1024px)": {
+          "& .swiper-button-next, & .swiper-button-prev": {
+            display: "none",
+          },
+        },
       }}
     >
       {/* overlay */}
@@ -135,7 +96,7 @@ function Skills() {
         maxWidth="lg"
         sx={{
           zIndex: 2,
-          pt: "10rem",
+          pt: "7rem",
           pb: "2rem",
           position: "relative",
         }}
@@ -164,91 +125,29 @@ function Skills() {
           </Typography>
         </Typography>
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "3rem",
-            flexWrap: "wrap",
+        <Swiper
+          effect={"coverflow"}
+          centeredSlides={true}
+          grabCursor={true}
+          spaceBetween={20}
+          slidesPerView={1}
+          loop={true}
+          autoplay={{ delay: 2500, disableOnInteraction: false }}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
           }}
+          pagination={{ dynamicBullets: true }}
+          navigation={true}
+          modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
         >
           {skills.map((skill, index) => (
-            <Box
-              key={index}
-              data-aos="fade-up"
-              minHeight={"calc(23.2rem + 7rem + 12rem)"}
-              display={"flex"}
-              flexDirection={"column"}
-              alignItems={"center"}
-              justifyContent={"center"}
-              textAlign={"center"}
-              flex={"1 1 30rem"}
-              // @ts-ignore
-              // bgcolor={`${theme.palette.bgColor.secondary}`}
-              // bgcolor={skill.color}
-              // bgcolor={`${theme.palette.bgColor.primary}`}
-
-              p={"3rem 2rem 4rem"}
-              borderRadius={"2rem"}
-              // @ts-ignore
-              boxShadow={`0 .1rem .5rem ${theme.palette.shadowColor.main}`}
-              // @ts-ignore
-              borderTop={`.6rem solid ${theme.palette.mainColor.main}`}
-              // @ts-ignore
-              borderBottom={`.6rem solid ${theme.palette.mainColor.main}`}
-              // borderTop={`.6rem solid ${skill.color}`}
-              // borderBottom={`.6rem solid ${skill.color}`}
-              sx={{
-                // @ts-ignore
-                transition: theme.palette.transition.main,
-
-                backdropFilter: "blur(3px)",
-
-                "&:hover": {
-                  // @ts-ignore
-                  boxShadow: `0 1.2rem 2rem ${theme.palette.shadowColor.main}`,
-                  transform: "scale(1.05)",
-                  // @ts-ignore
-                  // bgcolor:theme.palette.bgColor.main
-                  backdropFilter: "blur(5px)",
-                },
-                "&:hover h3": {
-                  color: skill.color,
-                },
-              }}
-            >
-              <Box>
-                <FontAwesomeIcon
-                  icon={skill.icon}
-                  fontSize={"7rem"}
-                  color={skill.color}
-                  style={{ marginBottom: "1.5rem" }}
-                />
-                <Typography
-                  variant="h3"
-                  component={"h3"}
-                  sx={{
-                    // @ts-ignore
-                    transition: theme.palette.transition.main,
-                  }}
-                >
-                  {skill.name}
-                </Typography>
-              </Box>
-              <Typography
-                variant="body1"
-                component={"p"}
-                sx={{
-                  fontSize: "1.6rem",
-                  m: "1rem 0 3rem",
-                }}
-              >
-                {skill.text}
-              </Typography>
-            </Box>
+            <SwiperSlide key={index}>
+              <SkillCard skill={skill} theme={theme} />
+            </SwiperSlide>
           ))}
-        </Box>
+        </Swiper>
       </Container>
     </Box>
   );
