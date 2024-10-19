@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { ColorModeContext } from "../../theme";
+import { useEffect, useState } from "react";
 import {
   AppBar,
   Box,
@@ -10,16 +9,15 @@ import {
   useTheme,
   Button,
   Drawer,
+  Stack,
 } from "@mui/material";
 import { Close, DataObject } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import DarkModeIcon from "./../DarkModeIcon";
 
 const pages = ["home", "about", "skills", "projects"]; //, "contact"
 
 function Header() {
-  const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
 
   const [showHeader, setShowHeader] = useState(true);
@@ -164,7 +162,8 @@ function Header() {
             >
               <Box
                 sx={{
-                  width: "350px",
+                  minWidth: "350px",
+                  width:"90%",
                   mx: "auto",
                   mt: 1,
                   position: "relative",
@@ -177,52 +176,58 @@ function Header() {
                   noWrap
                   display={"flex"}
                   alignItems={"center"}
-                  justifyContent={"center"}
+                  justifyContent={"space-between"}
                   sx={{
                     textDecoration: "none",
                     mx: "auto",
                   }}
                 >
-                  <DataObject
+                  {/* close IconButton */}
+                  <IconButton
                     sx={{
-                      mr: 1,
-                      fontSize: "5rem",
-                      // @ts-ignore
-                      color: theme.palette.mainColor.main,
+                      p: 0,
+                      "&:hover": {
+                        backgroundColor: "transparent",
+                      },
                     }}
-                  />
-                  <Typography
-                    sx={{
-                      mr: 2,
-                      fontFamily: "monospace",
-                      fontWeight: 900,
-                      letterSpacing: ".3rem",
-                      color: theme.palette.text.primary,
-                      fontSize: "4rem",
-                    }}
+                    onClick={toggleDrawer("top", false)}
                   >
-                    EISSA
-                  </Typography>
-                </Typography>
+                    <Close
+                      sx={{
+                        fontSize: 30,
+                      }}
+                    />
+                  </IconButton>
 
-                {/* close IconButton */}
-                <IconButton
-                  sx={{
-                    position: "absolute",
-                    top: 5,
-                    left: "-9px",
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                    },
-                  }}
-                  onClick={toggleDrawer("top", false)}
-                >
-                  <Close
-                    sx={{
-                      fontSize: 30,
-                    }}
-                  />
-                </IconButton>
+                  <Stack
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                    direction={"row"}
+                  >
+                    <DataObject
+                      sx={{
+                        mr: 1,
+                        fontSize: "5rem",
+                        // @ts-ignore
+                        color: theme.palette.mainColor.main,
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        mr: 2,
+                        fontFamily: "monospace",
+                        fontWeight: 900,
+                        letterSpacing: ".3rem",
+                        color: theme.palette.text.primary,
+                        fontSize: "4rem",
+                      }}
+                    >
+                      EISSA
+                    </Typography>
+                  </Stack>
+
+                  <DarkModeIcon />
+                </Typography>
 
                 {pages.map((page) => (
                   <Button
@@ -317,81 +322,7 @@ function Header() {
           </Box>
 
           {/* Dark Mode */}
-          <div>
-            {theme.palette.mode === "light" ? (
-              <IconButton
-                sx={{
-                  bgcolor: "#333",
-                  p: "5px",
-                  width: "28px",
-                  height: "28px",
-                  color: "#fff",
-                  // @ts-ignore
-                  transition: theme.palette.transition.main,
-                  "&:hover": {
-                    // backgroundColor: "transparent",
-                    bgcolor: "#fff",
-                    transform: "translateY(-3px)",
-                  },
-                  "&:hover .light-icon": {
-                    color: "#333",
-                  },
-                }}
-                onClick={() => {
-                  localStorage.setItem(
-                    "mode",
-                    theme.palette.mode === "dark" ? "light" : "dark"
-                  );
-                  colorMode.toggleColorMode();
-                }}
-                color="inherit"
-              >
-                <FontAwesomeIcon
-                  icon={faMoon}
-                  className="light-icon"
-                  style={{
-                    fontSize: "large",
-                  }}
-                />
-              </IconButton>
-            ) : (
-              <IconButton
-                sx={{
-                  bgcolor: "#fff",
-                  p: "5px",
-                  width: "28px",
-                  height: "28px",
-                  color: "#333",
-                  // @ts-ignore
-                  transition: theme.palette.transition.main,
-                  "&:hover": {
-                    bgcolor: "#333",
-                    backgroundColor: "transparent",
-                    transform: "translateY(-3px)",
-                  },
-                  "&:hover .dark-icon": {
-                    color: "#fff",
-                  },
-                }}
-                onClick={() => {
-                  localStorage.setItem(
-                    "mode",
-                    theme.palette.mode === "dark" ? "light" : "dark"
-                  );
-                  colorMode.toggleColorMode();
-                }}
-                color="inherit"
-              >
-                <FontAwesomeIcon
-                  icon={faSun}
-                  className="dark-icon"
-                  style={{
-                    fontSize: "large",
-                  }}
-                />
-              </IconButton>
-            )}
-          </div>
+          <DarkModeIcon />
         </Toolbar>
       </Container>
     </AppBar>
