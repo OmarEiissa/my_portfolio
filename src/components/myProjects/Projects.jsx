@@ -11,79 +11,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-const linkProjects = [
-  {
-    name: "leon",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
-    projectLink: "https://omareiissa.github.io/template-1-elzero-leon/",
-    githubLink: "",
-    image: "https://i.imgur.com/8Q8xvQD.png",
-  },
-  {
-    name: "kasper",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
-    projectLink: "https://omareiissa.github.io/template-2-elzero-kasper/",
-    githubLink: "",
-    image: "https://i.imgur.com/8Q8xvQD.png",
-  },
-  {
-    name: "portfolio",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
-    projectLink: "https://omareiissa.github.io/template-3-elzero-portfolio/",
-    githubLink: "",
-    image: "https://i.imgur.com/8Q8xvQD.png",
-  },
-  {
-    name: "dashboard",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
-    projectLink: "https://omareiissa.github.io/template-4-elzero-dashboard/",
-    githubLink: "",
-    image: "https://i.imgur.com/8Q8xvQD.png",
-  },
-  {
-    name: "portfolio",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
-    projectLink: "https://omareiissa.github.io/template-1-codezilla-portfolio/",
-    githubLink: "",
-    image: "https://i.imgur.com/8Q8xvQD.png",
-  },
-  {
-    name: "oclock",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
-    projectLink: "https://omareiissa.github.io/oclock/",
-    githubLink: "",
-    image: "https://i.imgur.com/8Q8xvQD.png",
-  },
-  {
-    name: "cruds",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
-    projectLink: "https://omareiissa.github.io/cruds/",
-    githubLink: "",
-    image: "https://i.imgur.com/8Q8xvQD.png",
-  },
-  {
-    name: "drag-and-drop",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
-    projectLink: "https://omareiissa.github.io/drag-and-drop/",
-    githubLink: "",
-    image: "https://i.imgur.com/8Q8xvQD.png",
-  },
-  {
-    name: "simple form",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
-    projectLink: "https://omareiissa.github.io/form/",
-    githubLink: "",
-    image: "https://i.imgur.com/8Q8xvQD.png",
-  },
-  {
-    name: "simple calculator",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
-    projectLink: "https://omareiissa.github.io/calculator/",
-    githubLink: "",
-    image: "https://i.imgur.com/8Q8xvQD.png",
-  },
-];
+import { linkProjects } from "../../contexts";
 
 function Projects() {
   const theme = useTheme();
@@ -93,37 +21,32 @@ function Projects() {
 
   useEffect(() => {
     AOS.init({ duration: 700, once: false });
-
-    const handleScroll = () => {
-      AOS.refresh();
-    };
-
+    const handleScroll = () => AOS.refresh();
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [theme.palette.mode]);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const apiKey = "8261400c8825437cb4f7df65adbd5607";
-    const fetchScreenshots = async () => {
-      const urls = {};
-      linkProjects.map((linkProject) => {
-        const screenshotApiUrl = `https://api.apiflash.com/v1/urltoimage?access_key=${apiKey}&wait_until=page_loaded&url=${encodeURIComponent(
-          linkProject.projectLink
-        )}`;
-        urls[linkProject.projectLink] = screenshotApiUrl;
-      });
 
-      setScreenshotUrls(urls);
+    const fetchScreenshots = async () => {
+      try {
+        const urls = {};
+        for (const linkProject of linkProjects) {
+          const screenshotApiUrl = `https://api.apiflash.com/v1/urltoimage?access_key=${apiKey}&wait_until=page_loaded&url=${encodeURIComponent(linkProject.projectLink)}`;
+          urls[linkProject.projectLink] = screenshotApiUrl;
+        }
+        setScreenshotUrls(urls);
+      } catch (error) {
+        console.error("Error fetching screenshots:", error);
+      }
     };
 
     fetchScreenshots();
   }, []);
 
   const toggleProjects = () => {
-    setShowAll(!showAll);
+    setShowAll((prev) => !prev);
     if (showAll) {
       projectsSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -149,7 +72,7 @@ function Projects() {
         className="project"
         maxWidth="lg"
         sx={{
-          pt: "10rem",
+          pt: "7rem",
           pb: "2rem",
         }}
       >
@@ -197,17 +120,18 @@ function Projects() {
               overflow={"hidden"}
               sx={{
                 "&:hover img": {
-                  transform: "scale(1.1)",
+                  transform: "scale(1.05)",
                 },
                 "&:hover .project-layer": {
                   opacity: 1,
                 },
+                transition: "transform 0.2s ease-in-out",
               }}
             >
               <CardMedia
                 component="img"
                 image={screenshotUrls[linkProject.projectLink]}
-                alt="Paella dish"
+                alt={linkProject.name}
                 sx={{
                   width: "100%",
                   // @ts-ignore
@@ -229,9 +153,9 @@ function Projects() {
                 flexDirection={"column"}
                 sx={{
                   // @ts-ignore
-                  backgroundImage: `linear-gradient(rgba(0, 0, 0, .1), ${theme.palette.mainColor.main})`,
+                  backgroundImage: `linear-gradient(rgba(0, 0, 0, .3), ${theme.palette.mainColor.main})`,
                   color: "white",
-                  p: "0 4rem",
+                  p: "1rem",
                   opacity: 0,
                   // @ts-ignore
                   transition: theme.palette.transition.main,
@@ -240,18 +164,12 @@ function Projects() {
                 <Typography
                   variant="h4"
                   component={"h4"}
-                  fontSize={{
-                    xs: "2.5rem",
-                    md: "3.5rem",
-                  }}
+                  fontSize={"2.5rem"}
                 >
                   {linkProject.name}
                 </Typography>
                 <Typography
-                  fontSize={{
-                    xs: "1rem",
-                    md: "1.5rem",
-                  }}
+                  fontSize={"1.5rem"}
                   m={".3rem 0 1rem"}
                 >
                   {linkProject.text}
@@ -275,6 +193,13 @@ function Projects() {
                     md: "4rem",
                   }}
                   bgcolor={theme.palette.text.secondary}
+                  sx={{
+                    "&:hover": {
+                      // @ts-ignore
+                      backgroundColor: theme.palette.mainColor.dark,
+                      transition: "background-color 0.2s ease-in-out", // تأثير انتقال للزر
+                    },
+                  }}
                 >
                   <FontAwesomeIcon
                     icon={faArrowUpRightFromSquare}
@@ -311,7 +236,7 @@ function Projects() {
               },
             }}
           >
-            {showAll ? "Show Less" : "Show More"}{" "}
+            {showAll ? "Show Less" : "Show More"}
           </Button>
         </Box>
       </Container>

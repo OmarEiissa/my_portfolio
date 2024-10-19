@@ -72,3 +72,76 @@ export const skills = [
     color: "#4d4d4d",
   },
 ];
+
+export const linkProjects = [
+  {
+    name: "leon",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
+    projectLink: "https://omareiissa.github.io/template-1-elzero-leon/",
+    githubLink: "",
+    image: "https://i.imgur.com/8Q8xvQD.png",
+  },
+  {
+    name: "kasper",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
+    projectLink: "https://omareiissa.github.io/template-2-elzero-kasper/",
+    githubLink: "",
+    image: "https://i.imgur.com/8Q8xvQD.png",
+  },
+  {
+    name: "portfolio",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
+    projectLink: "https://omareiissa.github.io/template-3-elzero-portfolio/",
+    githubLink: "",
+    image: "https://i.imgur.com/8Q8xvQD.png",
+  },
+  {
+    name: "dashboard",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
+    projectLink: "https://omareiissa.github.io/template-4-elzero-dashboard/",
+    githubLink: "",
+    image: "https://i.imgur.com/8Q8xvQD.png",
+  },
+  {
+    name: "portfolio",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
+    projectLink: "https://omareiissa.github.io/template-1-codezilla-portfolio/",
+    githubLink: "",
+    image: "https://i.imgur.com/8Q8xvQD.png",
+  },
+  {
+    name: "oclock",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
+    projectLink: "https://omareiissa.github.io/oclock/",
+    githubLink: "",
+    image: "https://i.imgur.com/8Q8xvQD.png",
+  },
+  {
+    name: "cruds",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
+    projectLink: "https://omareiissa.github.io/cruds/",
+    githubLink: "",
+    image: "https://i.imgur.com/8Q8xvQD.png",
+  },
+  {
+    name: "drag-and-drop",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
+    projectLink: "https://omareiissa.github.io/drag-and-drop/",
+    githubLink: "",
+    image: "https://i.imgur.com/8Q8xvQD.png",
+  },
+  {
+    name: "simple form",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
+    projectLink: "https://omareiissa.github.io/form/",
+    githubLink: "",
+    image: "https://i.imgur.com/8Q8xvQD.png",
+  },
+  {
+    name: "simple calculator",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, consequuntur optio",
+    projectLink: "https://omareiissa.github.io/calculator/",
+    githubLink: "",
+    image: "https://i.imgur.com/8Q8xvQD.png",
+  },
+];
