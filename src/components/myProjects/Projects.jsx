@@ -132,10 +132,14 @@ function Projects() {
                   "&:hover .project-layer": {
                     opacity: 1,
                   },
+                  "&:hover .project-image": {
+                    filter: "grayscale(0%)",
+                  },
                   transition: "transform 0.2s ease-in-out",
                 }}
               >
                 <CardMedia
+                className="project-image"
                   component="img"
                   image={linkProject.image}
                   alt={linkProject.name}
@@ -143,7 +147,7 @@ function Projects() {
                     width: "100%",
                     // @ts-ignore
                     transition: theme.palette.transition.main,
-                    // filter: "grayscale(100%)",
+                    filter: "grayscale(100%)",
                   }}
                 />
 
