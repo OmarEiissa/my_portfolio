@@ -32,12 +32,12 @@ function AboutMe() {
       id="about"
       sx={{
         // @ts-ignore
-        bgcolor: theme.palette.bgColor.main,
+        bgcolor: theme.palette.bgColor.secondary,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
-        overflow: "hidden"
+        overflow: "hidden",
       }}
     >
       <Container
@@ -70,7 +70,6 @@ function AboutMe() {
             sx={{
               width: { xs: "30rem", sm: "40rem", md: "35vw" },
               height: "100%",
-              filter: "grayscale(100%)",
             }}
           />
         </Box>
@@ -124,7 +123,7 @@ function AboutMe() {
             }}
           >
             <Typography
-            data-aos="fade-up"
+              data-aos="fade-up"
               sx={{
                 fontSize: { xs: "1.4rem", sm: "1.7rem", md: "1.3rem" },
                 fontWeight: 400,
@@ -136,7 +135,7 @@ function AboutMe() {
               engaging digital experiences.
             </Typography>
             <Typography
-            data-aos="fade-up"
+              data-aos="fade-up"
               sx={{
                 fontSize: { xs: "1.4rem", sm: "1.7rem", md: "1.3rem" },
                 fontWeight: 400,
@@ -148,7 +147,7 @@ function AboutMe() {
               that meet the needs of clients and users alike.
             </Typography>
             <Typography
-            data-aos="fade-up"
+              data-aos="fade-up"
               sx={{
                 fontSize: { xs: "1.4rem", sm: "1.7rem", md: "1.3rem" },
                 fontWeight: 400,

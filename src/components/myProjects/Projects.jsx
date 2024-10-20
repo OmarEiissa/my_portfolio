@@ -1,6 +1,4 @@
-import {
-  faEye,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -63,7 +61,7 @@ function Projects() {
       ref={projectsSectionRef}
       sx={{
         // @ts-ignore
-        bgcolor: theme.palette.bgColor.main,
+        bgcolor: theme.palette.bgColor.secondary,
         minHeight: "auto",
         pb: "3rem !important",
       }}
@@ -145,6 +143,7 @@ function Projects() {
                     width: "100%",
                     // @ts-ignore
                     transition: theme.palette.transition.main,
+                    // filter: "grayscale(100%)",
                   }}
                 />
 
@@ -192,7 +191,7 @@ function Projects() {
                       display={"inline-flex"}
                       justifyContent={"center"}
                       alignItems={"center"}
-                      gap={.5}
+                      gap={0.5}
                       borderRadius={".7rem"}
                       padding={"7px"}
                       // @ts-ignore
@@ -228,7 +227,7 @@ function Projects() {
                       display={"inline-flex"}
                       justifyContent={"center"}
                       alignItems={"center"}
-                      gap={.5}
+                      gap={0.5}
                       borderRadius={".7rem"}
                       padding={"7px"}
                       // @ts-ignore
