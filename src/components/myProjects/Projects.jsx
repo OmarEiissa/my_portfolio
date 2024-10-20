@@ -1,4 +1,7 @@
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEye,
+} from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Box,
@@ -15,7 +18,7 @@ import { linkProjects } from "../../contexts";
 
 function Projects() {
   const theme = useTheme();
-  const [screenshotUrls, setScreenshotUrls] = useState({});
+  // const [screenshotUrls, setScreenshotUrls] = useState({});
   const [showAll, setShowAll] = useState(false);
   const projectsSectionRef = useRef(null);
 
@@ -26,24 +29,24 @@ function Projects() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const apiKey = "8261400c8825437cb4f7df65adbd5607";
+  // useEffect(() => {
+  //   const apiKey = "8261400c8825437cb4f7df65adbd5607";
 
-    const fetchScreenshots = async () => {
-      try {
-        const urls = {};
-        for (const linkProject of linkProjects) {
-          const screenshotApiUrl = `https://api.apiflash.com/v1/urltoimage?access_key=${apiKey}&wait_until=page_loaded&url=${encodeURIComponent(linkProject.projectLink)}`;
-          urls[linkProject.projectLink] = screenshotApiUrl;
-        }
-        setScreenshotUrls(urls);
-      } catch (error) {
-        console.error("Error fetching screenshots:", error);
-      }
-    };
+  //   const fetchScreenshots = async () => {
+  //     try {
+  //       const urls = {};
+  //       for (const linkProject of linkProjects) {
+  //         const screenshotApiUrl = `https://api.apiflash.com/v1/urltoimage?access_key=${apiKey}&wait_until=page_loaded&url=${encodeURIComponent(linkProject.projectLink)}`;
+  //         urls[linkProject.projectLink] = screenshotApiUrl;
+  //       }
+  //       setScreenshotUrls(urls);
+  //     } catch (error) {
+  //       console.error("Error fetching screenshots:", error);
+  //     }
+  //   };
 
-    fetchScreenshots();
-  }, []);
+  //   fetchScreenshots();
+  // }, []);
 
   const toggleProjects = () => {
     setShowAll((prev) => !prev);
@@ -52,7 +55,7 @@ function Projects() {
     }
   };
 
-  const displayedProjects = showAll ? linkProjects : linkProjects.slice(0, 6);
+  const displayedProjects = showAll ? linkProjects : linkProjects.slice(-6);
 
   return (
     <Box
@@ -60,12 +63,9 @@ function Projects() {
       ref={projectsSectionRef}
       sx={{
         // @ts-ignore
-        bgcolor: theme.palette.bgColor.secondary,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        bgcolor: theme.palette.bgColor.main,
         minHeight: "auto",
-        pb: "7rem !important",
+        pb: "3rem !important",
       }}
     >
       <Container
@@ -102,122 +102,170 @@ function Projects() {
 
         <Box
           className="project-container"
-          display={"grid"}
-          gridTemplateColumns={"repeat(auto-fill, minmax(330px, 1fr))"}
-          alignItems={"center"}
+          display="flex"
+          flexWrap="wrap"
+          justifyContent={"center"}
           gap={"2.5rem"}
         >
-          {displayedProjects.map((linkProject, index) => (
-            <Box
-              key={index}
-              data-aos="fade-up"
-              className={`project-box ${linkProject.name}`}
-              position={"relative"}
-              display={"flex"}
-              borderRadius={"2rem"}
-              // @ts-ignore
-              boxShadow={`0 .1rem .5rem ${theme.palette.shadowColor.main}`}
-              overflow={"hidden"}
-              sx={{
-                "&:hover img": {
-                  transform: "scale(1.05)",
-                },
-                "&:hover .project-layer": {
-                  opacity: 1,
-                },
-                transition: "transform 0.2s ease-in-out",
-              }}
-            >
-              <CardMedia
-                component="img"
-                image={screenshotUrls[linkProject.projectLink]}
-                alt={linkProject.name}
-                sx={{
-                  width: "100%",
-                  // @ts-ignore
-                  transition: theme.palette.transition.main,
-                }}
-              />
-
+          {displayedProjects
+            .map((linkProject, index) => (
               <Box
-                className="project-layer"
-                position={"absolute"}
-                bottom={0}
-                left={0}
-                width={"100%"}
-                height={"100%"}
+                key={index}
+                data-aos="fade-up"
+                className={`project-box ${linkProject.name}`}
+                position={"relative"}
                 display={"flex"}
-                alignItems={"center"}
-                justifyContent={"center"}
-                textAlign={"center"}
-                flexDirection={"column"}
+                borderRadius={"2rem"}
+                // @ts-ignore
+                boxShadow={`0 .1rem .5rem ${theme.palette.shadowColor.main}`}
+                overflow={"hidden"}
+                minHeight={"200px"}
                 sx={{
-                  // @ts-ignore
-                  backgroundImage: `linear-gradient(rgba(0, 0, 0, .3), ${theme.palette.mainColor.main})`,
-                  color: "white",
-                  p: "1rem",
-                  opacity: 0,
-                  // @ts-ignore
-                  transition: theme.palette.transition.main,
+                  width: "calc(33.33% - 2rem)",
+                  "@media (max-width: 1100px)": {
+                    width: "calc(50% - 2rem)",
+                  },
+                  "@media (max-width: 744px)": {
+                    width: "100%",
+                  },
+                  "&:hover img": {
+                    transform: "scale(1.05)",
+                  },
+                  "&:hover .project-layer": {
+                    opacity: 1,
+                  },
+                  transition: "transform 0.2s ease-in-out",
                 }}
               >
-                <Typography
-                  variant="h4"
-                  component={"h4"}
-                  fontSize={"2.5rem"}
-                >
-                  {linkProject.name}
-                </Typography>
-                <Typography
-                  fontSize={"1.5rem"}
-                  m={".3rem 0 1rem"}
-                >
-                  {linkProject.text}
-                </Typography>
-
-                <Typography
-                  variant="body2"
-                  component={"a"}
-                  href={linkProject.projectLink}
-                  target="_blank"
-                  display={"inline-flex"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  borderRadius={"50%"}
-                  width={{
-                    xs: "3rem",
-                    md: "4rem",
-                  }}
-                  height={{
-                    xs: "3rem",
-                    md: "4rem",
-                  }}
-                  bgcolor={theme.palette.text.secondary}
+                <CardMedia
+                  component="img"
+                  image={linkProject.image}
+                  alt={linkProject.name}
                   sx={{
-                    "&:hover": {
-                      // @ts-ignore
-                      backgroundColor: theme.palette.mainColor.dark,
-                      transition: "background-color 0.2s ease-in-out", // تأثير انتقال للزر
-                    },
+                    width: "100%",
+                    // @ts-ignore
+                    transition: theme.palette.transition.main,
+                  }}
+                />
+
+                <Box
+                  className="project-layer"
+                  position={"absolute"}
+                  bottom={0}
+                  left={0}
+                  width={"100%"}
+                  height={"100%"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"space-evenly"}
+                  textAlign={"center"}
+                  flexDirection={"column"}
+                  sx={{
+                    // @ts-ignore
+                    backgroundImage: `linear-gradient(rgba(0, 0, 0, .3), ${theme.palette.mainColor.main})`,
+                    color: "white",
+                    p: "1rem",
+                    opacity: 0,
+                    // @ts-ignore
+                    transition: theme.palette.transition.main,
                   }}
                 >
-                  <FontAwesomeIcon
-                    icon={faArrowUpRightFromSquare}
-                    color={theme.palette.text.primary}
-                    fontSize={"1rem"}
-                    fontWeight={900}
-                  />
-                </Typography>
+                  <Typography variant="h4" component={"h4"} fontSize={"3rem"}>
+                    {linkProject.name}
+                  </Typography>
+                  <Typography
+                    fontSize={{
+                      sm: "1.2rem",
+                      md: "1.5rem",
+                    }}
+                    m={".3rem 0 1rem"}
+                  >
+                    {linkProject.description}
+                  </Typography>
+
+                  <Box display={"flex"} justifyContent={"center"} gap={"5px"}>
+                    <Typography
+                      variant="body2"
+                      component={"a"}
+                      href={linkProject.projectLink}
+                      target="_blank"
+                      display={"inline-flex"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                      gap={.5}
+                      borderRadius={".7rem"}
+                      padding={"7px"}
+                      // @ts-ignore
+                      bgcolor={theme.palette.bgColor.secondary}
+                      sx={{
+                        textDecoration: "none",
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faEye}
+                        color={theme.palette.text.primary}
+                        fontSize={"1.3rem"}
+                        fontWeight={900}
+                      />
+
+                      <Typography
+                        variant="body2"
+                        component={"span"}
+                        sx={{
+                          color: theme.palette.text.primary,
+                          fontSize: "1.1rem",
+                        }}
+                      >
+                        View Project
+                      </Typography>
+                    </Typography>
+
+                    <Typography
+                      variant="body2"
+                      component={"a"}
+                      href={linkProject.githubLink}
+                      target="_blank"
+                      display={"inline-flex"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                      gap={.5}
+                      borderRadius={".7rem"}
+                      padding={"7px"}
+                      // @ts-ignore
+                      bgcolor={theme.palette.bgColor.secondary}
+                      sx={{
+                        textDecoration: "none",
+                      }}
+                    >
+                      <Typography
+                        variant="body2"
+                        component={"span"}
+                        sx={{
+                          color: theme.palette.text.primary,
+                          fontSize: "1.1rem",
+                        }}
+                      >
+                        visit GitHub
+                      </Typography>
+
+                      <FontAwesomeIcon
+                        icon={faGithub}
+                        color={theme.palette.text.primary}
+                        fontSize={"1.3rem"}
+                        fontWeight={900}
+                      />
+                    </Typography>
+                  </Box>
+                </Box>
               </Box>
-            </Box>
-          ))}
+            ))
+            .reverse()}
         </Box>
 
         <Box
           display={linkProjects.length <= 6 ? "none" : "flex"}
           justifyContent={"center"}
           mt={"4rem"}
-          data-aos="flip-down"
         >
           <Button
             onClick={toggleProjects}
@@ -225,14 +273,21 @@ function Projects() {
             sx={{
               fontSize: "1.6rem",
               fontWeight: "600",
-              padding: "1rem 2rem",
-              borderRadius: "2rem",
+              padding: ".7rem 1.7rem",
+              borderRadius: "1rem",
               // @ts-ignore
               bgcolor: theme.palette.mainColor.main,
+              // @ts-ignore
+              transition: theme.palette.transition.main,
               color: "#fff",
               "&:hover": {
                 // @ts-ignore
-                bgcolor: theme.palette.mainColor.dark,
+                bgcolor: theme.palette.mainColor.main,
+                opacity: 0.7,
+              },
+              "&:active": {
+                transform: "scale(0.9)",
+                opacity: 1,
               },
             }}
           >

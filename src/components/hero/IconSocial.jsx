@@ -1,27 +1,9 @@
 import { useEffect } from "react";
-import { FacebookRounded, GitHub, Instagram, LinkedIn } from "@mui/icons-material";
 import { IconButton, Stack, useTheme } from "@mui/material";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { icons } from "../../contexts";
 
-const icons = [
-  {
-    name: "Facebook",
-    component: FacebookRounded,
-    link: "https://www.facebook.com/profile.php?id=100007823404381&mibextid=ZbWKwL",
-  },
-  { name: "GitHub", component: GitHub, link: "https://github.com/yourprofile" },
-  {
-    name: "Instagram",
-    component: Instagram,
-    link: "https://instagram.com/yourprofile",
-  },
-  {
-    name: "LinkedIn",
-    component: LinkedIn,
-    link: "https://linkedin.com/in/yourprofile",
-  },
-];
 
 function IconSocial() {
   const theme = useTheme();
@@ -30,7 +12,7 @@ function IconSocial() {
     AOS.init({ duration: 700, once: false });
 
     const handleScroll = () => {
-      AOS.refresh(); // إعادة تهيئة AOS عند التمرير
+      AOS.refresh();
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -50,7 +32,6 @@ function IconSocial() {
             aria-label={icon.name.toLowerCase()}
             href={icon.link}
             target="_blank"
-            onClick={(e) => e.preventDefault()}
             data-aos="fade-up"
             data-aos-delay={`${index * 100}`}
             sx={{

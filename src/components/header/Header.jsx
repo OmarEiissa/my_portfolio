@@ -162,7 +162,6 @@ function Header() {
             >
               <Box
                 sx={{
-                  minWidth: "350px",
                   width:"90%",
                   mx: "auto",
                   mt: 1,

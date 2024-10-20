@@ -57,7 +57,7 @@ const SkillCard = ({ skill, theme }) => {
           m: "1rem 0 3rem",
         }}
       >
-        {skill.text}
+        {skill.description}
       </Typography>
     </Box>
   );

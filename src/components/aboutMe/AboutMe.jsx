@@ -32,7 +32,7 @@ function AboutMe() {
       id="about"
       sx={{
         // @ts-ignore
-        bgcolor: theme.palette.bgColor.secondary,
+        bgcolor: theme.palette.bgColor.main,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -65,11 +65,12 @@ function AboutMe() {
           <CardMedia
             component="img"
             height="194"
-            image="src\images\Programming-amico.svg"
+            image="/svg/Programming-amico.svg"
             alt="Paella dish"
             sx={{
               width: { xs: "30rem", sm: "40rem", md: "35vw" },
               height: "100%",
+              filter: "grayscale(100%)",
             }}
           />
         </Box>

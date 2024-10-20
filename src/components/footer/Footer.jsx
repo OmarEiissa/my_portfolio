@@ -65,13 +65,13 @@ const Footer = () => {
       style={{
         // @ts-ignore
         backgroundColor: theme.palette.mainColor.main,
-        padding: "10px",
+        padding: "4px",
       }}
     >
       <Box
         flexDirection={"column"}
         display={"flex"}
-        justifyContent={"center"}
+        justifyContent={"space-between"}
         alignItems={"center"}
       >
         <Typography variant="h6" color={theme.palette.text.secondary} textAlign="center">

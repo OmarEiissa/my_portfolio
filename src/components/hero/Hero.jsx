@@ -185,9 +185,8 @@ function Hero() {
             <Stack direction="row" sx={{ mb: 0 }}>
               <Button
                 aria-label="download cv"
-                href={"/cvUrl"}
+                href={"/cv.pdf"}
                 target="_blank"
-                onClick={(e) => e.preventDefault()}
                 sx={{
                   color: "#fff",
                   // @ts-ignore

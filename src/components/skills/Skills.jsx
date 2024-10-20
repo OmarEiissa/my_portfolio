@@ -107,7 +107,7 @@ function Skills() {
           component={"h2"}
           sx={{
             textAlign: "center",
-            m: "0 0 5rem",
+            m: "0 0 4rem",
             fontSize: "5.5rem",
             fontWeight: "700",
           }}
@@ -132,7 +132,7 @@ function Skills() {
           spaceBetween={20}
           slidesPerView={1}
           loop={true}
-          autoplay={{ delay: 2500, disableOnInteraction: false }}
+          // autoplay={{ delay: 2500, disableOnInteraction: false }}
           breakpoints={{
             640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
@@ -141,6 +141,13 @@ function Skills() {
           pagination={{ dynamicBullets: true }}
           navigation={true}
           modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
+          coverflowEffect={{
+            // rotate: 0,
+            // stretch: 0,
+            // depth: 100,
+            // modifier: 1,
+            slideShadows: false,
+          }}
         >
           {skills.map((skill, index) => (
             <SwiperSlide key={index}>

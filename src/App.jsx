@@ -19,7 +19,7 @@ function App() {
       <ThemeProvider
         // @ts-ignore
         theme={theme}
-      >
+        >
         <CssBaseline />
 
         {/* Global Styles for Scrollbar */}

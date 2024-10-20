@@ -33,7 +33,7 @@ export const getDesignTokens = (mode) => ({
           },
 
           img: {
-            main: "url(src/images/wallpaperLight.jpg)",
+            main: "url(bg/wallpaperLight.jpg)",
           },
 
           transition: {
@@ -70,7 +70,7 @@ export const getDesignTokens = (mode) => ({
           },
 
           img: {
-            main: "url(src/images/wallpaperDark.jpg)",
+            main: "url(bg/wallpaperDark.jpg)",
           },
 
           transition: {
