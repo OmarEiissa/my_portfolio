@@ -248,7 +248,7 @@ function Projects() {
                           fontSize: "1.1rem",
                         }}
                       >
-                        visit GitHub
+                        Visit GitHub
                       </Typography>
 
                       <FontAwesomeIcon

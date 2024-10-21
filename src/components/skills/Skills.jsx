@@ -132,7 +132,7 @@ function Skills() {
           spaceBetween={20}
           slidesPerView={1}
           loop={true}
-          // autoplay={{ delay: 2500, disableOnInteraction: false }}
+          autoplay={{ delay: 2500, disableOnInteraction: false }}
           breakpoints={{
             640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
